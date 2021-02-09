@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/ldelosa/vim-grpc.vim/proto/env";
+
+package env;
+
+// imports are relative to /proto root.
+import "env/env.proto";
+
+// Env service describes the environment Vim is running under.
+service Env {
+  rpc GetEnv(GetEnvRequest) returns (GetEnvResponse) {};
+}

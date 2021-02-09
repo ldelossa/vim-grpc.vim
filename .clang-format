@@ -1,0 +1,10 @@
+---
+Language: Proto
+AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: true 
+AlignConsecutiveStyle: AcrossEmptyLinesAndComments
+ColumnLimit: 0 
+IndentWidth: 4
+---
+Language: Cpp
+DisableFormat: true

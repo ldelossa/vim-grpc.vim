@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "buffers.proto";
+
+option go_package = "github.com/ldelossa/vim-grpc.vim/proto";
+
+package proto;
+
+// Proxy acts as a surrogate between
+// Vim and a gRPC client.
+service Proxy {
+  rpc GetBufInfo(GetBufInfoRequest) returns (GetBufInfoResponse) {}
+}

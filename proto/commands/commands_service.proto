@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "github.com/ldelosa/vim-grpc.vim/proto/env";
+
+package commands;
+
+import "commands/commands.proto";
+
+service Commands {
+  rpc RegisterCommand(RegisterCommandRequest) returns (stream CommandEvent);
+}
+

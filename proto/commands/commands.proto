@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "github.com/ldelosa/vim-grpc.vim/proto/env";
+
+package commands;
+
+// RegisterCommandRequest asks vim-grpc.vim to register the described
+// command on behalf of an extension.
+message RegisterCommandRequest {
+    string extension = 1;
+    string command   = 2;
+    string title     = 3;
+}
+
+// CommandEvent is a OneOf holding sub-message types affiliated
+// with an extension's registered command.
+message CommandEvent {
+    oneof event {
+        CommandRegistration Registration = 1;
+        CommandIssued       Issued       = 2;
+    }
+}
+
+message CommandRegistration {
+    bool   registered = 1;
+    string reason     = 2;
+}
+
+message CommandIssued {
+    string command = 1;
+    string title   = 2;
+}

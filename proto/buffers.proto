@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "github.com/ldelossa/vim-grpc.vim/proto";
+
+package proto;
+
+// BufInfo is an informational structure describing a buffer
+// open in the current Vim session.
+message BufInfo {
+  // buffer number
+  int64 bufnr = 1;
+  // TRUE if the buffer is modified 
+  bool  changed = 2;
+  // Number of changes made to the buffer
+  int64 changed_tick = 3;
+  // TRUE if the buffer is hidden
+  bool  hidden = 4;
+  // Timestamp in seconds
+  int64 last_used = 5;
+  // TRUE if the buffer is listed
+  bool  listed = 6;
+  // Line number used for the buffer when opened in the current window.
+  int64 lnum = 7;
+  //  Number of lines in the buffer (only valid when loaded)
+  int64 line_count = 8;
+  // TRUE if the buffer is loaded
+  bool  loaded = 9;
+  // Full path to the file in the buffer
+  string name = 10;
+
+  message Sign {
+   string id = 1;
+   int64 lnum = 2;
+   string name = 3;
+  }
+  // List of signs placed in the buffer
+  repeated Sign signs = 11;
+  // List of window-IDs that display this buffer
+  repeated int64 windows = 12;
+  // List of popup window-IDs that display this buffer
+  repeated int64 popups = 13;
+}
+
+// GetBufInfoRequest defines the GetBufInfo rpc arguments.
+message GetBufInfoRequest {
+  oneof buffer_id {
+    int64 bufn = 4;
+    string buf_name = 5;
+  }
+}
+
+// GetBufInfoResponse defines the GetBufInfo rpc response.
+message GetBufInfoResponse {
+  repeated BufInfo buffers= 1;
+}
